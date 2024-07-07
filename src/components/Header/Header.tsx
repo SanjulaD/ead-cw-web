@@ -1,14 +1,10 @@
-import { useState } from 'react';
-import Button from '@/components/Button';
-import useAuthStore from '@/store/useAuthStore';
 import SearchForm from '@/components/Header/SearchForm';
+import useAuthStore from '@/store/useAuthStore';
 import Notifications from './Notifications';
 import User from './User';
 
 const Header = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore(
-    (state) => state
-  );
+  const { isAuthenticated } = useAuthStore((state) => state);
 
   return (
     <header className="sticky top-0 z-999 flex w-full border-b border-stroke bg-white dark:border-stroke-dark dark:bg-gray-dark">
@@ -21,21 +17,15 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-normal gap-2 2xsm:gap-4 lg:w-full lg:justify-between xl:w-auto xl:justify-normal">
-          <ul className="flex items-center gap-2 2xsm:gap-4">
-            {/* <!-- Search Form --> */}
-            <SearchForm />
-            {/* <!-- Search Form --> */}
-
-            {/* <!-- Notification Menu Area --> */}
-            <Notifications />
-            {/* <!-- Notification Menu Area --> */}
-          </ul>
-
-          {/* <!-- User Area --> */}
-          <User />
-          {/* <!-- User Area --> */}
-        </div>
+        {!isAuthenticated ? (
+          <div className="flex items-center justify-normal gap-2 2xsm:gap-4 lg:w-full lg:justify-between xl:w-auto xl:justify-normal">
+            <ul className="flex items-center gap-2 2xsm:gap-4">
+              <SearchForm />
+              <Notifications />
+            </ul>
+            <User />
+          </div>
+        ) : null}
       </div>
     </header>
   );

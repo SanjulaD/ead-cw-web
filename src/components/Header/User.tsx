@@ -1,16 +1,22 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ClickOutside from '@/components/Common/ClickOutside';
 
 const User = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
+    <ClickOutside
+      onClick={() => {
+        setDropdownOpen(false);
+      }}
+      className="relative"
+    >
       <div
         role="button"
         className="flex items-center gap-4"
-        onClick={() => setDropdownOpen(!dropdownOpen)}
+        onClick={() => {
+          setDropdownOpen(!dropdownOpen);
+        }}
       >
         <span className="h-12 w-12 rounded-full overflow-hidden">
           <img
@@ -25,7 +31,7 @@ const User = () => {
 
           <svg
             className={`fill-current duration-200 ease-in ${
-              dropdownOpen && 'rotate-180'
+              dropdownOpen ? 'rotate-180' : ''
             }`}
             width="20"
             height="20"

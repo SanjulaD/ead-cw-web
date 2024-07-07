@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -19,19 +19,12 @@ const ClickOutside: React.FC<Props> = ({
     const handleClickListener = (event: MouseEvent) => {
       let clickedInside = false;
 
-      if (
-        wrapperRef.current &&
-        wrapperRef.current.contains(event.target as Node)
-      ) {
+      if (wrapperRef.current?.contains(event.target as Node)) {
         clickedInside = true;
       }
 
-      if (exceptionRef && exceptionRef.current) {
-        if (exceptionRef.current === event.target) {
-          clickedInside = true;
-        } else if (exceptionRef.current.contains(event.target as Node)) {
-          clickedInside = true;
-        }
+      if (exceptionRef?.current?.contains(event.target as Node)) {
+        clickedInside = true;
       }
 
       if (!clickedInside) {
@@ -47,7 +40,7 @@ const ClickOutside: React.FC<Props> = ({
   }, [exceptionRef, onClick]);
 
   return (
-    <div ref={wrapperRef} className={className || ''}>
+    <div ref={wrapperRef} className={className ?? ''}>
       {children}
     </div>
   );

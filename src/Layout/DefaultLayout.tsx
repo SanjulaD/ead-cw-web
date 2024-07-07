@@ -6,9 +6,9 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col h-full overflow-hidden">
-      <div className="flex flex-1 items-center justify-center overflow-y-auto">
-        <main className="flex items-center justify-center w-full h-full">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+        <main>
           <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
             {children}
           </div>

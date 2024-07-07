@@ -1,10 +1,10 @@
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import DefaultLayout from 'Layout/DefaultLayout';
 import Header from './components/Header';
 import Router from './routes';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import DefaultLayout from 'Layout/DefaultLayout';
 
 function App() {
   const queryClient = new QueryClient();

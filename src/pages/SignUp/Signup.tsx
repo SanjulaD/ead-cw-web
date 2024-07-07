@@ -1,9 +1,10 @@
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { loginSchema } from '@/lib/validation';
-import { LoginBody } from '@/types/auth';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { type LoginBody } from '@/types/auth';
 
 const SignUp = () => {
   const {
@@ -24,7 +25,7 @@ const SignUp = () => {
         </h3>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="p-8">
+        <div className="p-5">
           <Input
             errors={errors}
             placeholder="Enter Username"
@@ -67,6 +68,12 @@ const SignUp = () => {
           />
 
           <Button text=" Sign Up" type="submit" />
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Already have an account?{' '}
+            <Link to="/" className="text-primary">
+              Sign In
+            </Link>
+          </p>
         </div>
       </form>
     </div>

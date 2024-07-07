@@ -1,6 +1,7 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Dashboard from '@/pages/Dashboard';
 import Login from '@/pages/Login';
 import SignUp from '@/pages/SignUp';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -21,6 +22,15 @@ const Router = () => (
         element={
           <PublicRoute>
             <SignUp />
+          </PublicRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <PublicRoute>
+            <Dashboard />
           </PublicRoute>
         }
       />
