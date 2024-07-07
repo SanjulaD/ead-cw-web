@@ -7,3 +7,12 @@ export const formatDate = (date: Date | string): string => {
     minute: 'numeric',
   });
 };
+
+export const formatTableHeader = (header: string): string => {
+  switch (header) {
+    case 'durationMinutes':
+      return 'Duration Minutes';
+    default:
+      return header.charAt(0).toUpperCase() + header.slice(1);
+  }
+};
