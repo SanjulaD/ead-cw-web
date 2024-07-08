@@ -5,7 +5,7 @@ import LineChart from '@/components/Statistics/LineChart';
 
 const Dashboard = () => {
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <div>
         <DataStats />
       </div>

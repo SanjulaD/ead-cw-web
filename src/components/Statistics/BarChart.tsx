@@ -11,7 +11,7 @@ const BarChart: React.FC = () => {
   ];
 
   const options: ApexOptions = {
-    colors: ['#5750F1', '#0ABEF9', '#FF4560', '#00E396'],
+    colors: ['#5750F1'],
     chart: {
       type: 'bar',
       height: 335,
@@ -40,8 +40,8 @@ const BarChart: React.FC = () => {
     plotOptions: {
       bar: {
         horizontal: false,
-        borderRadius: 3,
-        columnWidth: '25%',
+        borderRadius: 8,
+        columnWidth: '70%',
         borderRadiusApplication: 'end',
         borderRadiusWhenStacked: 'last',
       },

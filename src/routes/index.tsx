@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
 import Dashboard from '@/pages/Dashboard';
 import Login from '@/pages/Login';
 import Performance from '@/pages/Performance';
@@ -10,7 +11,7 @@ import PublicRoute from './PublicRoute';
 const Router = () => (
   <Routes>
     <Route
-      path="/"
+      path={COMMON_ROUTES.HOME}
       element={
         <PublicRoute>
           <Login />
@@ -18,7 +19,7 @@ const Router = () => (
       }
     />
     <Route
-      path="/signup"
+      path={COMMON_ROUTES.SIGN_UP}
       element={
         <PublicRoute>
           <SignUp />
@@ -27,7 +28,17 @@ const Router = () => (
     />
 
     <Route
-      path="/dashboard"
+      path={COMMON_ROUTES.SIGN_UP}
+      element={
+        <PrivateRoute>
+          <Articles />
+        </PrivateRoute>
+      }
+    />
+
+    {/* Student Routes */}
+    <Route
+      path={STUDENT_ROUTES.DASHBOARD}
       element={
         <PublicRoute>
           <Dashboard />
@@ -35,21 +46,15 @@ const Router = () => (
       }
     />
     <Route
-      path="/my-performance"
+      path={STUDENT_ROUTES.MY_PERFORMANCE}
       element={
         <PublicRoute>
           <Performance />
         </PublicRoute>
       }
     />
-    <Route
-      path="/articles"
-      element={
-        <PrivateRoute>
-          <Articles />
-        </PrivateRoute>
-      }
-    />
+
+    {/* Admin Routes */}
   </Routes>
 );
 

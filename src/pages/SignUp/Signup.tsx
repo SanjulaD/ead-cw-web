@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import { loginSchema } from '@/lib/validation';
-import { type LoginBody } from '@/types/auth';
+import { signUpSchema } from '@/lib/validation';
+import { type SignUpBody } from '@/types/auth';
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginBody>({ resolver: yupResolver(loginSchema) });
+  } = useForm<SignUpBody>({ resolver: yupResolver(signUpSchema) });
 
-  const onSubmit: SubmitHandler<LoginBody> = async (data) => {
+  const onSubmit: SubmitHandler<SignUpBody> = async (data: SignUpBody) => {
     console.log(data);
   };
 
@@ -64,10 +64,10 @@ const SignUp = () => {
             label="Password"
             type="password"
             register={register}
-            name="password"
+            name="rePassword"
           />
 
-          <Button text=" Sign Up" type="submit" />
+          <Button text="Sign Up" type="submit" />
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{' '}
             <Link to="/" className="text-primary">

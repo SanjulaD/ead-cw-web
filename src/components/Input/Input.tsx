@@ -39,6 +39,11 @@ const Input = <T extends FieldValues, U extends FieldValues>({
         {...(register && register(name))}
         {...rest}
       />
+      {errors && errors[name as keyof U] && (
+        <span className="text-red text-xs">
+          {errors[name as keyof U]?.message as string}
+        </span>
+      )}
     </div>
   );
 };

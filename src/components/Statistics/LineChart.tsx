@@ -115,10 +115,6 @@ const LineChart: React.FC = () => {
     xaxis: {
       type: 'category',
       categories: [
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
         'Jan',
         'Feb',
         'Mar',
@@ -127,6 +123,10 @@ const LineChart: React.FC = () => {
         'Jun',
         'Jul',
         'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ],
       axisBorder: {
         show: false,

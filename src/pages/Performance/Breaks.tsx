@@ -6,10 +6,12 @@ const Breaks = () => {
     {
       date: '2024-07-02',
       durationMinutes: 590,
+      note: '',
     },
     {
       date: '2024-07-02',
       durationMinutes: 467,
+      note: '',
     },
   ];
 
@@ -17,7 +19,7 @@ const Breaks = () => {
     <Table
       title="Breaks"
       data={breaksData}
-      headers={['date', 'durationMinutes']}
+      headers={['date', 'durationMinutes', 'note']}
       buttonText="Add Break"
       buttonDisplay={true}
     />

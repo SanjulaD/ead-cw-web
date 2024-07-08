@@ -25,7 +25,7 @@ const Login = () => {
     }
   }, [isError]);
 
-  const onSubmit: SubmitHandler<LoginBody> = async (data) => {
+  const onSubmit: SubmitHandler<LoginBody> = async (data: LoginBody) => {
     await login(data);
     setIsAuthenticated(true);
   };
