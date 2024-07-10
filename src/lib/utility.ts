@@ -6,3 +6,18 @@ export const subjectOptions: SubjectOption[] = [
   { value: 'history', label: 'History' },
   { value: 'english', label: 'English' },
 ];
+
+export const monthsInYear: string[] = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
