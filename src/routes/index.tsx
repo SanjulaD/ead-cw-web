@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ADMIN_ROUTES, COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
 import AdminDashboard from '@/pages/Admin/AdminDashboard';
-import Dashboard from '@/pages/Dashboard';
 import Login from '@/pages/Login';
 import Performance from '@/pages/Performance';
 import SignUp from '@/pages/SignUp';
@@ -42,7 +41,7 @@ const Router = () => (
       path={STUDENT_ROUTES.DASHBOARD}
       element={
         <PublicRoute>
-          <Dashboard />
+          <AdminDashboard />
         </PublicRoute>
       }
     />
