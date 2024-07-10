@@ -124,7 +124,7 @@ const LineChart: React.FC = () => {
       <div className="mb-3.5 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h4 className="text-body-2xlg font-bold text-dark dark:text-white">
-            Study Time Over Time
+            Total number of study sessions over time
           </h4>
         </div>
         <div className="flex items-center gap-2.5">
