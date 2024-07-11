@@ -41,17 +41,17 @@ const Router = () => (
     <Route
       path={STUDENT_ROUTES.DASHBOARD}
       element={
-        <PublicRoute>
+        <PrivateRoute>
           <Dashboard />
-        </PublicRoute>
+        </PrivateRoute>
       }
     />
     <Route
       path={STUDENT_ROUTES.MY_PERFORMANCE}
       element={
-        <PublicRoute>
+        <PrivateRoute>
           <Performance />
-        </PublicRoute>
+        </PrivateRoute>
       }
     />
 
@@ -60,9 +60,9 @@ const Router = () => (
     <Route
       path={ADMIN_ROUTES.DASHBOARD}
       element={
-        <PublicRoute>
+        <PrivateRoute>
           <AdminDashboard />
-        </PublicRoute>
+        </PrivateRoute>
       }
     />
   </Routes>

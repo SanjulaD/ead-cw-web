@@ -1,10 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '@/components/Common/ClickOutside';
-import { STUDENT_ROUTES } from '@/enums/routes';
+import { COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
+import { removeItem } from '@/lib/localStorage';
+import useAuthStore from '@/store/useAuthStore';
 
 const User = () => {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuthStore((state) => state);
+
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    removeItem('userData');
+    setIsAuthenticated(false);
+    navigate(COMMON_ROUTES.HOME);
+  };
 
   return (
     <ClickOutside
@@ -139,7 +150,12 @@ const User = () => {
               Dashboard
             </Link>
 
-            <button className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base">
+            <button
+              onClick={() => {
+                handleLogout();
+              }}
+              className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base"
+            >
               <svg
                 className="fill-current"
                 width="18"

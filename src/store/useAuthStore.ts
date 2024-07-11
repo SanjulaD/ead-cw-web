@@ -11,8 +11,11 @@ export interface AuthStore extends AuthState {
   setIsAdmin: (args: AuthState['isAdmin']) => void;
 }
 
+const userData = localStorage.getItem('userData');
+const parsedUserData = userData ? JSON.parse(userData) : null;
+
 const initialState: Pick<AuthStore, keyof AuthState> = {
-  isAuthenticated: false,
+  isAuthenticated: !!(parsedUserData && parsedUserData.authToken),
   isAdmin: false,
 };
 

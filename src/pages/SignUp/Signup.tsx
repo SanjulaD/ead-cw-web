@@ -1,20 +1,42 @@
+import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import { COMMON_ROUTES } from '@/enums/routes';
 import { signUpSchema } from '@/lib/validation';
-import { type SignUpBody } from '@/types/auth';
+import { useSignUpQuery } from '@/services/queries/auth.query';
+import { type SignUpRequestBody } from '@/types/auth';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpBody>({ resolver: yupResolver(signUpSchema) });
+  } = useForm<SignUpRequestBody>({ resolver: yupResolver(signUpSchema) });
 
-  const onSubmit: SubmitHandler<SignUpBody> = async (data: SignUpBody) => {
-    console.log(data);
+  const { isLoading, mutateAsync: signUp, isError, error } = useSignUpQuery();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error as string, { theme: 'colored' });
+    }
+  }, [isError]);
+
+  const onSubmit: SubmitHandler<SignUpRequestBody> = async (
+    data: SignUpRequestBody
+  ) => {
+    try {
+      const response = await signUp(data);
+      toast.success(response, { theme: 'colored' });
+      navigate(COMMON_ROUTES.HOME);
+    } catch (err) {
+      toast.error(error as string, { theme: 'colored' });
+    }
   };
 
   return (
@@ -67,7 +89,7 @@ const SignUp = () => {
             name="rePassword"
           />
 
-          <Button text="Sign Up" type="submit" />
+          <Button text="Sign Up" type="submit" isLoading={isLoading} />
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{' '}
             <Link to="/" className="text-primary">

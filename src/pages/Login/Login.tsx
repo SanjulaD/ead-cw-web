@@ -5,10 +5,11 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input/Input';
+import { setItem } from '@/lib/localStorage';
 import { loginSchema } from '@/lib/validation';
 import { useLoginQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
-import { type LoginBody } from '@/types/auth';
+import { type LoginRequestBody, type LoginResponseBody } from '@/types/auth';
 
 const Login = () => {
   const { setIsAuthenticated } = useAuthStore((state) => state);
@@ -17,7 +18,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginBody>({ resolver: yupResolver(loginSchema) });
+  } = useForm<LoginRequestBody>({ resolver: yupResolver(loginSchema) });
 
   useEffect(() => {
     if (isError) {
@@ -25,9 +26,28 @@ const Login = () => {
     }
   }, [isError]);
 
-  const onSubmit: SubmitHandler<LoginBody> = async (data: LoginBody) => {
-    await login(data);
-    setIsAuthenticated(true);
+  const onSubmit: SubmitHandler<LoginRequestBody> = async (
+    data: LoginRequestBody
+  ) => {
+    try {
+      const response: LoginResponseBody = await login(data);
+      console.log(response);
+      if (response.jwtToken) {
+        const userData = {
+          authToken: response.jwtToken,
+          userId: response.userId,
+          username: response.username,
+          email: response.email,
+          roles: response.role,
+        };
+        setItem('userData', userData);
+        setIsAuthenticated(true);
+      } else {
+        throw new Error('Login failed: Missing token in response.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
