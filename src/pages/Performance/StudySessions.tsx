@@ -1,24 +1,16 @@
+import React from 'react';
 import Table from '@/components/Table';
 import { type StudySession } from '@/types/studySession';
 
-const StudySessions = () => {
-  const studySessionData: StudySession[] = [
-    {
-      subject: 'Google',
-      date: '2024-07-02',
-      durationMinutes: 590,
-    },
-    {
-      subject: 'X.com',
-      date: '2024-07-02',
-      durationMinutes: 467,
-    },
-  ];
+type StudySessionsProps = {
+  studySessions: StudySession[];
+};
 
+const StudySessions: React.FC<StudySessionsProps> = ({ studySessions }) => {
   return (
     <Table
       title="Study Session"
-      data={studySessionData}
+      data={studySessions}
       headers={['subject', 'date', 'durationMinutes']}
       buttonText="Add Study Session"
       buttonDisplay={true}

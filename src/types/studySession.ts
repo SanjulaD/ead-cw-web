@@ -1,5 +1,5 @@
 export interface StudySession {
-  id?: string;
+  studySessionID?: string;
   subject: string;
   date: string;
   durationMinutes: number;

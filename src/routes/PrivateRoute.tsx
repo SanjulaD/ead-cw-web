@@ -8,9 +8,11 @@ interface Props {
 }
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
-  const { isAuthenticated } = useAuthStore((state) => state);
+  const { role } = useAuthStore((state) => ({
+    role: state.role,
+  }));
 
-  return isAuthenticated ? children : <Navigate to={COMMON_ROUTES.HOME} />;
+  return role === 'Student' ? children : <Navigate to={COMMON_ROUTES.HOME} />;
 };
 
 export default PrivateRoute;

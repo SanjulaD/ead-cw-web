@@ -8,13 +8,11 @@ interface AdminRouteProps {
 }
 
 const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
-  const { isAuthenticated, isAdmin } = useAuthStore();
+  const { role } = useAuthStore((state) => ({
+    role: state.role,
+  }));
 
-  return isAuthenticated && isAdmin ? (
-    children
-  ) : (
-    <Navigate to={COMMON_ROUTES.HOME} />
-  );
+  return role === 'Admin' ? children : <Navigate to={COMMON_ROUTES.HOME} />;
 };
 
 export default AdminRoute;

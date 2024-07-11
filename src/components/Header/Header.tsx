@@ -4,7 +4,7 @@ import Notifications from './Notifications';
 import User from './User';
 
 const Header = () => {
-  const { isAuthenticated } = useAuthStore((state) => state);
+  const { role } = useAuthStore((state) => state);
 
   return (
     <header className="sticky top-0 z-999 flex w-full border-b border-stroke bg-white dark:border-stroke-dark dark:bg-gray-dark">
@@ -12,12 +12,12 @@ const Header = () => {
         <div className="hidden xl:block">
           <div>
             <h1 className="mb-0.5 text-heading-5 font-bold text-dark dark:text-white">
-              {isAuthenticated ? 'Dashboard' : 'Student Performance Tracker'}
+              {role ? 'Dashboard' : 'Student Performance Tracker'}
             </h1>
           </div>
         </div>
 
-        {isAuthenticated ? (
+        {role ? (
           <div className="flex items-center justify-normal gap-2 2xsm:gap-4 lg:w-full lg:justify-between xl:w-auto xl:justify-normal">
             <ul className="flex items-center gap-2 2xsm:gap-4">
               <SearchForm />

@@ -1,5 +1,5 @@
 export interface Break {
-  note: string;
+  note?: string;
   date: string;
   durationMinutes: number;
 }

@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input/Input';
-import { setItem } from '@/lib/localStorage';
+import { setItem, storageName } from '@/lib/localStorage';
 import { loginSchema } from '@/lib/validation';
 import { useLoginQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import { type LoginRequestBody, type LoginResponseBody } from '@/types/auth';
 
 const Login = () => {
-  const { setIsAuthenticated } = useAuthStore((state) => state);
+  const { setRole } = useAuthStore((state) => state);
   const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
   const {
     register,
@@ -31,7 +31,6 @@ const Login = () => {
   ) => {
     try {
       const response: LoginResponseBody = await login(data);
-      console.log(response);
       if (response.jwtToken) {
         const userData = {
           authToken: response.jwtToken,
@@ -40,8 +39,8 @@ const Login = () => {
           email: response.email,
           roles: response.role,
         };
-        setItem('userData', userData);
-        setIsAuthenticated(true);
+        setItem(storageName, userData);
+        setRole(userData.roles);
       } else {
         throw new Error('Login failed: Missing token in response.');
       }

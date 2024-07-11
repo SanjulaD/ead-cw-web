@@ -1,3 +1,6 @@
+const storageName = 'userData';
+const authToken = 'authToken';
+
 const getItem = <T = unknown>(key: string): T | null => {
   const value = window.localStorage.getItem(key);
   if (!value) return null;
@@ -12,4 +15,4 @@ const removeItem = (key: string) => {
   window.localStorage.removeItem(key);
 };
 
-export { getItem, setItem, removeItem };
+export { getItem, setItem, removeItem, storageName, authToken };

@@ -16,3 +16,9 @@ export const formatTableHeader = (header: string): string => {
       return header.charAt(0).toUpperCase() + header.slice(1);
   }
 };
+
+export const hasProperty = <O, P extends PropertyKey>(
+  obj: O,
+  prop: P
+): obj is O & Record<P, unknown> =>
+  Object.prototype.hasOwnProperty.call(obj, prop);

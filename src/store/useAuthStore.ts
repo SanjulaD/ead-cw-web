@@ -1,33 +1,27 @@
 import { create } from 'zustand';
+import { getItem, storageName } from '@/lib/localStorage';
 import { logger } from './logger';
 
 interface AuthState {
-  isAuthenticated: boolean;
-  isAdmin: boolean;
+  role: string | null;
 }
 
 export interface AuthStore extends AuthState {
-  setIsAuthenticated: (args: AuthState['isAuthenticated']) => void;
-  setIsAdmin: (args: AuthState['isAdmin']) => void;
+  setRole: (role: AuthState['role']) => void;
 }
 
-const userData = localStorage.getItem('userData');
-const parsedUserData = userData ? JSON.parse(userData) : null;
+const userData = getItem<{ authToken: string; roles: string }>(storageName);
 
 const initialState: Pick<AuthStore, keyof AuthState> = {
-  isAuthenticated: !!(parsedUserData && parsedUserData.authToken),
-  isAdmin: false,
+  role: userData?.roles ?? null,
 };
 
 const useAuthStore = create<AuthStore>()(
   logger<AuthStore>(
     (set) => ({
       ...initialState,
-      setIsAuthenticated: (isAuthenticated) => {
-        set(() => ({ isAuthenticated }));
-      },
-      setIsAdmin: (isAdmin) => {
-        set(() => ({ isAdmin }));
+      setRole: (role) => {
+        set(() => ({ role }));
       },
     }),
     'authStore'
