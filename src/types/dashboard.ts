@@ -5,3 +5,15 @@ export type dataStats = {
   value?: string;
   percent?: number;
 };
+
+export interface StudentMetrics {
+  totalStudyTimeMinutes: number;
+  averageStudySessionDuration: number;
+  totalBreakTimeMinutes: number;
+  numberOfStudySessions: number;
+  monthlyStudyTimeHours: number[];
+  monthlyBreakTimeHours: number[];
+  totalStudyTimeHoursByYear: number;
+  totalBreakTimeHoursByYear: number;
+  totalStudyTimeBySubjectByWeek: Record<string, number>;
+}

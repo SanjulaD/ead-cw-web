@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ADMIN_ROUTES, COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
 import AdminDashboard from '@/pages/Admin/AdminDashboard';
 import Dashboard from '@/pages/Dashboard';
@@ -57,7 +57,6 @@ const Router = () => (
     />
 
     {/* Admin Routes */}
-
     <Route
       path={ADMIN_ROUTES.DASHBOARD}
       element={
@@ -66,6 +65,9 @@ const Router = () => (
         </AdminRoute>
       }
     />
+
+    {/* Wildcard Route */}
+    <Route path="*" element={<Navigate to={COMMON_ROUTES.HOME} />} />
   </Routes>
 );
 

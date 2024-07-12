@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import Spinner from '@/components/Spinner';
+import { LoadingOverlay } from '@/components/Loader';
 import Breaks from '@/pages/Performance/Breaks';
 import StudySessions from '@/pages/Performance/StudySessions';
 import { useGetMyBreaksQuery } from '@/services/queries/student/breaks.query';
@@ -31,11 +31,11 @@ const Performance: React.FC = () => {
     <div className="w-full">
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:mt-6 2xl:mt-9">
         {studySessionsLoading ? (
-          <Spinner />
+          <LoadingOverlay />
         ) : (
           <StudySessions studySessions={studySessions ?? []} />
         )}
-        {breaksLoading ? <Spinner /> : <Breaks breaks={breaks ?? []} />}
+        {breaksLoading ? <LoadingOverlay /> : <Breaks breaks={breaks ?? []} />}
       </div>
     </div>
   );

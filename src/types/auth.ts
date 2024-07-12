@@ -24,3 +24,11 @@ export interface SignUpResponseBody {
   password: string;
   rePassword: string;
 }
+
+export interface UserData {
+  authToken: string;
+  userId: string;
+  username: string;
+  email: string;
+  roles: string;
+}

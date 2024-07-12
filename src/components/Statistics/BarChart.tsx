@@ -2,11 +2,22 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { type ApexOptions } from 'apexcharts';
 
-const BarChart: React.FC = () => {
+interface BarChartProps {
+  totalStudyTimeBySubjectByWeek: Record<string, number>;
+}
+
+const BarChart: React.FC<BarChartProps> = ({
+  totalStudyTimeBySubjectByWeek,
+}) => {
+  const subjects = Object?.keys(totalStudyTimeBySubjectByWeek);
+  const studyTimes = subjects?.map((subject) =>
+    Number((totalStudyTimeBySubjectByWeek[subject] / 60).toFixed(1))
+  );
+
   const series = [
     {
       name: 'Study Time (hours)',
-      data: [15, 20, 10, 18],
+      data: studyTimes,
     },
   ];
 
@@ -65,7 +76,7 @@ const BarChart: React.FC = () => {
     },
 
     xaxis: {
-      categories: ['Math', 'Science', 'History', 'English'],
+      categories: subjects,
     },
     legend: {
       position: 'top',
