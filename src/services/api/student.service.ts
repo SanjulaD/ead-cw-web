@@ -41,6 +41,21 @@ export const createStudySession = async (
   }
 };
 
+export const deleteStudySession = async (id: string): Promise<StudySession> => {
+  try {
+    const response: AxiosResponse<StudySession> =
+      await api.delete<StudySession>(`${STUDY_SESSION_PREFIX}/${id}`);
+    return response.data;
+  } catch (error) {
+    const axiosError = error as AxiosError<any>;
+    if (axiosError.response) {
+      throw axiosError.response.data;
+    } else {
+      throw axiosError;
+    }
+  }
+};
+
 export const getBreaks = async (): Promise<Break[]> => {
   try {
     const response: AxiosResponse<Break[]> = await api.get<Break[]>(
@@ -62,6 +77,22 @@ export const createBreak = async (body: Break): Promise<Break> => {
     const response: AxiosResponse<Break> = await api.post<Break>(
       `${BREAKS_PREFIX}`,
       body
+    );
+    return response.data;
+  } catch (error) {
+    const axiosError = error as AxiosError<any>;
+    if (axiosError.response) {
+      throw axiosError.response.data;
+    } else {
+      throw axiosError;
+    }
+  }
+};
+
+export const deleteBreak = async (id: string): Promise<Break> => {
+  try {
+    const response: AxiosResponse<Break> = await api.delete<Break>(
+      `${BREAKS_PREFIX}/${id}`
     );
     return response.data;
   } catch (error) {
