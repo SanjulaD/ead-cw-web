@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useQueryClient } from '@tanstack/react-query';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { createBreakSchema } from '@/lib/validation';
+import { useCreateBreaksQuery } from '@/services/queries/student/breaks.query';
 import { type Break } from '@/types/break';
 
 interface CreateBreakProps {
@@ -20,8 +23,32 @@ const CreateBreak: React.FC<CreateBreakProps> = ({ setShowModal, isOpen }) => {
 
   if (!isOpen) return null;
 
+  const queryClient = useQueryClient();
+
+  const {
+    isLoading,
+    mutateAsync: breaks,
+    isError,
+    error,
+  } = useCreateBreaksQuery();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error as string, { theme: 'colored' });
+    }
+  }, [isError]);
+
+  if (!isOpen) return null;
+
   const onSubmit: SubmitHandler<Break> = async (data: Break) => {
-    console.log(data);
+    try {
+      await breaks(data);
+      toast.success('Break Created Successfully', { theme: 'colored' });
+      setShowModal(false);
+      await queryClient.invalidateQueries(['myBreaks']);
+    } catch (err) {
+      toast.error(error as string, { theme: 'colored' });
+    }
   };
 
   return (
@@ -66,7 +93,7 @@ const CreateBreak: React.FC<CreateBreakProps> = ({ setShowModal, isOpen }) => {
                       setShowModal(false);
                     }}
                   />
-                  <Button text="Save" type="submit" />
+                  <Button text="Save" type="submit" isLoading={isLoading} />
                 </div>
               </form>
             </div>

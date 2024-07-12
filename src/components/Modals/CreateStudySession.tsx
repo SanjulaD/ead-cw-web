@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useQueryClient } from '@tanstack/react-query';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
 import { subjectOptions } from '@/lib/utility';
 import { createStudySessionSchema } from '@/lib/validation';
+import { useCreateStudySessionsQuery } from '@/services/queries/student/studySessions.query';
 import { type StudySession } from '@/types/studySession';
 
 interface CreateStudySessionProps {
@@ -25,10 +28,32 @@ const CreateStudySession: React.FC<CreateStudySessionProps> = ({
     resolver: yupResolver(createStudySessionSchema),
   });
 
+  const queryClient = useQueryClient();
+
+  const {
+    isLoading,
+    mutateAsync: studySession,
+    isError,
+    error,
+  } = useCreateStudySessionsQuery();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error as string, { theme: 'colored' });
+    }
+  }, [isError]);
+
   if (!isOpen) return null;
 
   const onSubmit: SubmitHandler<StudySession> = async (data: StudySession) => {
-    console.log(data);
+    try {
+      await studySession(data);
+      toast.success('Study Session Created Successfully', { theme: 'colored' });
+      setShowModal(false);
+      await queryClient.invalidateQueries(['myStudySessions']);
+    } catch (err) {
+      toast.error(error as string, { theme: 'colored' });
+    }
   };
 
   return (
@@ -85,7 +110,7 @@ const CreateStudySession: React.FC<CreateStudySessionProps> = ({
                       setShowModal(false);
                     }}
                   />
-                  <Button text="Save" type="submit" />
+                  <Button text="Save" type="submit" isLoading={isLoading} />
                 </div>
               </form>
             </div>

@@ -1,10 +1,10 @@
 import { type SubjectOption } from '@/types/studySession';
 
 export const subjectOptions: SubjectOption[] = [
-  { value: 'math', label: 'Math' },
-  { value: 'science', label: 'Science' },
-  { value: 'history', label: 'History' },
-  { value: 'english', label: 'English' },
+  { value: 'Math', label: 'Math' },
+  { value: 'Science', label: 'Science' },
+  { value: 'History', label: 'History' },
+  { value: 'English', label: 'English' },
 ];
 
 export const monthsInYear: string[] = [
