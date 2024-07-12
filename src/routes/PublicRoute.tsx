@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { Navigate } from 'react-router';
-import { STUDENT_ROUTES } from '@/enums/routes';
+import { ADMIN_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
 import useAuthStore from '@/store/useAuthStore';
 
 interface Props {
@@ -8,10 +8,12 @@ interface Props {
 }
 
 const PublicRoute: React.FC<Props> = ({ children }) => {
-  const { isAuthenticated } = useAuthStore((state) => state);
+  const { role } = useAuthStore((state) => state);
 
-  return isAuthenticated ? (
+  return role === 'Student' ? (
     <Navigate to={STUDENT_ROUTES.DASHBOARD} />
+  ) : role === 'Admin' ? (
+    <Navigate to={ADMIN_ROUTES.DASHBOARD} />
   ) : (
     children
   );

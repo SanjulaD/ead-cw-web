@@ -3,7 +3,7 @@ import {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import { getItem } from './localStorage';
+import { getItem, storageName } from '@/lib/localStorage';
 
 export interface ConsoleError {
   status: number;
@@ -13,10 +13,11 @@ export interface ConsoleError {
 export const requestInterceptor = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const token = getItem<string>('token');
-  if (token) {
-    config.headers.set('Authorization', `Bearer ${token}`);
+  const userData = getItem<{ authToken: string }>(storageName);
+  if (userData) {
+    config.headers.set('Authorization', `Bearer ${userData.authToken}`);
   }
+
   return config;
 };
 

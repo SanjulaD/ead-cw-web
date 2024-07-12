@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '@/components/Common/ClickOutside';
 import { COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
-import { removeItem } from '@/lib/localStorage';
+import { removeItem, storageName } from '@/lib/localStorage';
 import useAuthStore from '@/store/useAuthStore';
 
 const User = () => {
+  const { setRole } = useAuthStore();
+
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuthStore((state) => state);
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   const handleLogout = () => {
-    removeItem('userData');
-    setIsAuthenticated(false);
+    removeItem(storageName);
+    setRole(null);
     navigate(COMMON_ROUTES.HOME);
   };
 

@@ -6,6 +6,7 @@ import Login from '@/pages/Login';
 import Performance from '@/pages/Performance';
 import SignUp from '@/pages/SignUp';
 import Articles from '../pages/Articles';
+import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -60,9 +61,9 @@ const Router = () => (
     <Route
       path={ADMIN_ROUTES.DASHBOARD}
       element={
-        <PrivateRoute>
+        <AdminRoute>
           <AdminDashboard />
-        </PrivateRoute>
+        </AdminRoute>
       }
     />
   </Routes>
