@@ -1,5 +1,6 @@
 import { type ReactElement } from 'react';
 import { Navigate } from 'react-router';
+import { ROLES } from '@/enums/roles';
 import { COMMON_ROUTES } from '@/enums/routes';
 import useAuthStore from '@/store/useAuthStore';
 
@@ -12,7 +13,11 @@ const PrivateRoute: React.FC<Props> = ({ children }) => {
     role: state.role,
   }));
 
-  return role === 'Student' ? children : <Navigate to={COMMON_ROUTES.HOME} />;
+  return role === ROLES.STUDENT ? (
+    children
+  ) : (
+    <Navigate to={COMMON_ROUTES.HOME} />
+  );
 };
 
 export default PrivateRoute;

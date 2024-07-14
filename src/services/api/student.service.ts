@@ -107,7 +107,7 @@ export const deleteBreak = async (id: string): Promise<Break> => {
   }
 };
 
-export const getMetrics = async (): Promise<StudentMetrics> => {
+export const getStudentMetrics = async (): Promise<StudentMetrics> => {
   try {
     const response: AxiosResponse<StudentMetrics> =
       await api.get<StudentMetrics>(`${METRICS_PREFIX}`);

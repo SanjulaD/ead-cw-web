@@ -1,5 +1,6 @@
 import { type ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
+import { ROLES } from '@/enums/roles';
 import { COMMON_ROUTES } from '@/enums/routes';
 import useAuthStore from '@/store/useAuthStore';
 
@@ -12,7 +13,7 @@ const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
     role: state.role,
   }));
 
-  return role === 'Admin' ? children : <Navigate to={COMMON_ROUTES.HOME} />;
+  return role === ROLES.ADMIN ? children : <Navigate to={COMMON_ROUTES.HOME} />;
 };
 
 export default AdminRoute;
