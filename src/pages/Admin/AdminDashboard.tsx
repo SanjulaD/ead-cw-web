@@ -4,7 +4,7 @@ import BarChart from '@/components/Admin/BarChart';
 import DataStats from '@/components/Admin/DataCard';
 import LineChart from '@/components/Admin/LineChart';
 import { LoadingOverlay } from '@/components/Loader';
-import { useGetAdminStatisticsQuery } from '@/services/queries/student/dashboard';
+import { useGetAdminStatisticsQuery } from '@/services/queries/admin/dashboard.query';
 
 const AdminDashboard = () => {
   const {

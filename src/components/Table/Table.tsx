@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import Button from '@/components/Button/Button';
-import { CreateBreak, CreateStudySession } from '@/components/Modals';
+import {
+  CreateBreak,
+  CreateStudySession,
+  CreateUser,
+} from '@/components/Modals';
 import { formatTableHeader, hasProperty } from '@/lib/helper';
 
 interface TableProps<T> {
@@ -38,6 +42,10 @@ const Table = <T,>({
       case 'Add Break':
         return (
           <CreateBreak setShowModal={setIsModalOpen} isOpen={isModalOpen} />
+        );
+      case 'Add User':
+        return (
+          <CreateUser setShowModal={setIsModalOpen} isOpen={isModalOpen} />
         );
       default:
         return null;

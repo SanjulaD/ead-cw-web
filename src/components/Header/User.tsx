@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '@/components/Common/ClickOutside';
 import { ROLES } from '@/enums/roles';
-import { COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
+import { ADMIN_ROUTES, COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
 import { getItem, removeItem, storageName } from '@/lib/localStorage';
 import useAuthStore from '@/store/useAuthStore';
 import { type UserData } from '@/types/auth';
@@ -170,7 +170,7 @@ const User: React.FC<UserProps> = ({ role }) => {
               <>
                 <Link
                   relative="path"
-                  to={STUDENT_ROUTES.MY_PERFORMANCE}
+                  to={ADMIN_ROUTES.USERS}
                   className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base"
                 >
                   <svg
@@ -198,7 +198,7 @@ const User: React.FC<UserProps> = ({ role }) => {
                 </Link>
                 <Link
                   relative="path"
-                  to={STUDENT_ROUTES.DASHBOARD}
+                  to={ADMIN_ROUTES.DASHBOARD}
                   className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base"
                 >
                   <svg
