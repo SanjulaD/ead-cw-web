@@ -9,7 +9,11 @@ import { setItem, storageName } from '@/lib/localStorage';
 import { loginSchema } from '@/lib/validation';
 import { useLoginQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
-import { type LoginRequestBody, type LoginResponseBody } from '@/types/auth';
+import {
+  type LoginRequestBody,
+  type LoginResponseBody,
+  type UserData,
+} from '@/types/auth';
 
 const Login = () => {
   const { setRole } = useAuthStore((state) => state);
@@ -32,7 +36,7 @@ const Login = () => {
     try {
       const response: LoginResponseBody = await login(data);
       if (response.jwtToken) {
-        const userData = {
+        const userData: UserData = {
           authToken: response.jwtToken,
           userId: response.userId,
           username: response.username,

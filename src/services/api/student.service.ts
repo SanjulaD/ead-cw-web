@@ -1,10 +1,12 @@
 import { type AxiosError, type AxiosResponse } from 'axios';
 import { api } from '@/lib/api';
 import { type Break } from '@/types/break';
+import { type StudentMetrics } from '@/types/dashboard';
 import { type StudySession } from '@/types/studySession';
 
 const STUDY_SESSION_PREFIX = 'StudySessions';
 const BREAKS_PREFIX = 'Breaks';
+const METRICS_PREFIX = 'StudentMetrics';
 
 export const getStudySessions = async (): Promise<StudySession[]> => {
   try {
@@ -94,6 +96,21 @@ export const deleteBreak = async (id: string): Promise<Break> => {
     const response: AxiosResponse<Break> = await api.delete<Break>(
       `${BREAKS_PREFIX}/${id}`
     );
+    return response.data;
+  } catch (error) {
+    const axiosError = error as AxiosError<any>;
+    if (axiosError.response) {
+      throw axiosError.response.data;
+    } else {
+      throw axiosError;
+    }
+  }
+};
+
+export const getMetrics = async (): Promise<StudentMetrics> => {
+  try {
+    const response: AxiosResponse<StudentMetrics> =
+      await api.get<StudentMetrics>(`${METRICS_PREFIX}`);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError<any>;

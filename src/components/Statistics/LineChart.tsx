@@ -3,15 +3,27 @@ import ReactApexChart from 'react-apexcharts';
 import { type ApexOptions } from 'apexcharts';
 import { monthsInYear } from '@/lib/utility';
 
-const LineChart: React.FC = () => {
+interface LineChartProps {
+  monthlyStudyTimeHours: number[];
+  monthlyBreakTimeHours: number[];
+  totalStudyTimeHoursByYear: number;
+  totalBreakTimeHoursByYear: number;
+}
+
+const LineChart: React.FC<LineChartProps> = ({
+  monthlyStudyTimeHours,
+  monthlyBreakTimeHours,
+  totalStudyTimeHoursByYear,
+  totalBreakTimeHoursByYear,
+}) => {
   const series = [
     {
       name: 'Study Time (hours)',
-      data: [0, 20, 35, 45, 35, 55, 65, 50, 65, 75, 60, 75],
+      data: monthlyStudyTimeHours,
     },
     {
       name: 'Break Time (hours)',
-      data: [15, 9, 17, 32, 25, 68, 80, 68, 84, 94, 74, 62],
+      data: monthlyBreakTimeHours,
     },
   ];
 
@@ -148,13 +160,13 @@ const LineChart: React.FC = () => {
         <div className="border-stroke dark:border-dark-3 xsm:w-1/2 xsm:border-r">
           <p className="font-medium">Study Time</p>
           <h4 className="mt-1 text-xl font-bold text-dark dark:text-white">
-            540 hours
+            {totalStudyTimeHoursByYear} hours
           </h4>
         </div>
         <div className="xsm:w-1/2">
           <p className="font-medium">Break Time</p>
           <h4 className="mt-1 text-xl font-bold text-dark dark:text-white">
-            500 hours
+            {totalBreakTimeHoursByYear} hours
           </h4>
         </div>
       </div>

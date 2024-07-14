@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ClickOutside from '@/components/Common/ClickOutside';
 import { COMMON_ROUTES, STUDENT_ROUTES } from '@/enums/routes';
-import { removeItem, storageName } from '@/lib/localStorage';
+import { getItem, removeItem, storageName } from '@/lib/localStorage';
 import useAuthStore from '@/store/useAuthStore';
+import { type UserData } from '@/types/auth';
 
 const User = () => {
   const { setRole } = useAuthStore();
@@ -11,6 +12,13 @@ const User = () => {
   const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
+  const [userData, setUserData] = useState<UserData>();
+
+  useEffect(() => {
+    const storedUserData = (getItem(storageName) ?? '{}') as UserData;
+    setUserData(storedUserData);
+  }, []);
 
   const handleLogout = () => {
     removeItem(storageName);
@@ -41,7 +49,7 @@ const User = () => {
         </span>
 
         <span className="flex items-center gap-2 font-medium text-dark dark:text-dark-6">
-          <span className="hidden lg:block">Jhon Smith</span>
+          <span className="hidden lg:block">{userData?.username ?? ''}</span>
 
           <svg
             className={`fill-current duration-200 ease-in ${
@@ -86,10 +94,10 @@ const User = () => {
 
             <span className="block">
               <span className="block font-medium text-dark dark:text-white">
-                Jhon Smith
+                {userData?.username ?? ''}
               </span>
               <span className="block font-medium text-dark-5 dark:text-dark-6">
-                jonson@nextadmin.com
+                {userData?.email ?? ''}
               </span>
             </span>
           </div>
