@@ -4,7 +4,7 @@ import { LoadingOverlay } from '@/components/Loader';
 import BarChart from '@/components/Statistics/BarChart';
 import DataCard from '@/components/Statistics/DataCard';
 import LineChart from '@/components/Statistics/LineChart';
-import { useGetMyStatisticsQuery } from '@/services/queries/student/dashboard';
+import { useGetMyStatisticsQuery } from '@/services/queries/student/dashboard.query';
 
 const Dashboard = () => {
   const {
