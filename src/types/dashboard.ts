@@ -17,3 +17,16 @@ export interface StudentMetrics {
   totalBreakTimeHoursByYear: number;
   totalStudyTimeBySubjectByWeek: Record<string, number>;
 }
+
+export interface AdminMetrics {
+  totalNumberOfStudents: number;
+  totalNumberOfStudySessions: number;
+  totalNumberOfBreaks: number;
+  totalStudyTimeLogged: number;
+  totalBreakTimeLogged: number;
+  monthlyStudyTimeHours: number[];
+  monthlyBreakTimeHours: number[];
+  totalStudyTimeHoursByYear: number;
+  totalBreakTimeHoursByYear: number;
+  totalStudyTimeBySubjectByWeek: Record<string, number>;
+}

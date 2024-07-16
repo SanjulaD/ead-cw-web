@@ -5,6 +5,7 @@ enum STUDENT_ROUTES {
 
 enum ADMIN_ROUTES {
   DASHBOARD = '/admin/dashboard',
+  USERS = '/admin/users',
 }
 
 enum COMMON_ROUTES {

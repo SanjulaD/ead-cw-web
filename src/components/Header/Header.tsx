@@ -23,7 +23,7 @@ const Header = () => {
               <SearchForm />
               <Notifications />
             </ul>
-            <User />
+            <User role={role} />
           </div>
         ) : null}
       </div>
