@@ -125,9 +125,9 @@ export const getStudentMetrics = async (): Promise<StudentMetrics> => {
   }
 };
 
-export const getMyPredictions = async (): Promise<Prediction> => {
+export const getMyPredictions = async (): Promise<Prediction[]> => {
   try {
-    const response: AxiosResponse<Prediction> = await api.get<Prediction>(
+    const response: AxiosResponse<Prediction[]> = await api.get<Prediction[]>(
       `${PREDICTION_PREFIX}`
     );
     return response.data;

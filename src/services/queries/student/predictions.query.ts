@@ -6,7 +6,7 @@ import {
 import { type Prediction } from '@/types/prediction';
 
 export const useGetMyPredictionsQuery = () =>
-  useQuery<Prediction>(['myPredictions'], async () => {
+  useQuery<Prediction[]>(['myPredictions'], async () => {
     const res = await getMyPredictions();
     return res;
   });

@@ -101,7 +101,16 @@ const CreateUser: React.FC<CreateUserProps> = ({ setShowModal, isOpen }) => {
                     name="rePassword"
                   />
 
-                  <Button text="Create" type="submit" isLoading={isLoading} />
+                  <div className="flex items-center justify-end p-2 border-t border-solid border-blueGray-200 rounded-b space-x-4">
+                    <Button
+                      text="Close"
+                      type="button"
+                      onClick={() => {
+                        setShowModal(false);
+                      }}
+                    />
+                    <Button text="Create" type="submit" isLoading={isLoading} />
+                  </div>
                 </div>
               </form>
             </div>

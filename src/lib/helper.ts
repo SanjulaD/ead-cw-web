@@ -9,12 +9,9 @@ export const formatDate = (date: Date | string): string => {
 };
 
 export const formatTableHeader = (header: string): string => {
-  switch (header) {
-    case 'durationMinutes':
-      return 'Duration Minutes';
-    default:
-      return header.charAt(0).toUpperCase() + header.slice(1);
-  }
+  return header
+    .replace(/([A-Z])/g, ' $1') // Add a space before each capital letter
+    .replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
 };
 
 export const hasProperty = <O, P extends PropertyKey>(
