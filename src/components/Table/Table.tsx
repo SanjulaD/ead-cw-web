@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@/components/Button/Button';
 import {
   CreateBreak,
+  CreatePrediction,
   CreateStudySession,
   CreateUser,
 } from '@/components/Modals';
@@ -46,6 +47,13 @@ const Table = <T,>({
       case 'Add User':
         return (
           <CreateUser setShowModal={setIsModalOpen} isOpen={isModalOpen} />
+        );
+      case 'Make predictions':
+        return (
+          <CreatePrediction
+            setShowModal={setIsModalOpen}
+            isOpen={isModalOpen}
+          />
         );
       default:
         return null;

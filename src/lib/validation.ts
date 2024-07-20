@@ -50,3 +50,7 @@ export const createBreakSchema = yup.object({
     .positive('Duration must be a positive number')
     .integer('Duration must be an integer'),
 });
+
+export const createPredictionSchema = yup.object({
+  subject: yup.string().required('Subject is required'),
+});

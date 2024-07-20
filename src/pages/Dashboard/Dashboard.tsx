@@ -4,7 +4,8 @@ import { LoadingOverlay } from '@/components/Loader';
 import BarChart from '@/components/Statistics/BarChart';
 import DataCard from '@/components/Statistics/DataCard';
 import LineChart from '@/components/Statistics/LineChart';
-import { useGetMyStatisticsQuery } from '@/services/queries/student/dashboard';
+import Predictions from '@/components/Statistics/Predictions';
+import { useGetMyStatisticsQuery } from '@/services/queries/student/dashboard.query';
 
 const Dashboard = () => {
   const {
@@ -34,8 +35,8 @@ const Dashboard = () => {
               numberOfStudySessions={statistics?.numberOfStudySessions}
             />
           </div>
-          <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 xl:grid-cols-3 2xl:mt-9">
-            <div className="col-span-3 xl:col-span-2">
+          <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 xl:grid-cols-1 2xl:mt-9">
+            <div className="col-span-1 xl:col-span-2">
               <LineChart
                 monthlyStudyTimeHours={statistics?.monthlyStudyTimeHours}
                 monthlyBreakTimeHours={statistics?.monthlyBreakTimeHours}
@@ -46,6 +47,12 @@ const Dashboard = () => {
                   statistics?.totalBreakTimeHoursByYear
                 }
               />
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 xl:grid-cols-3 2xl:mt-9">
+            <div className="col-span-3 xl:col-span-2">
+              <Predictions />
             </div>
             <div className="col-span-3 xl:col-span-1">
               <BarChart
